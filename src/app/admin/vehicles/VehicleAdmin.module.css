@@ -1,111 +1,303 @@
+/* VehicleAdmin.module.css */
+
 .container {
-  padding: 40px;
-  max-width: 1700px;
-  margin: auto;
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.h1 {
-  text-align: center;
-  margin-bottom: 30px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header h1 {
   font-size: 28px;
-  color: #333;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
 }
 
 .addButton {
-  display: block;
-  margin: 0 auto 30px auto;
-  padding: 12px 30px;
-  font-size: 16px;
-  background-color: #007bff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .addButton:hover {
-  background-color: #0056b3;
-  transform: scale(1.02);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.statsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+}
+
+.statCard h3 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+}
+
+.statCard p {
+  color: #7f8c8d;
+  margin: 0;
+  font-size: 14px;
 }
 
 .tableContainer {
-  overflow-x: auto;
-  cursor: grab;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-}
-
-.tableContainer:active {
-  cursor: grabbing;
+  background: white;
+  border-radius: 12px;
+  overflow: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 16px;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-}
-
-.table th, .table td {
-  padding: 15px;
-  text-align: left;
+  min-width: 1000px;
 }
 
 .table th {
-  background-color: #007bff;
-  color: white;
-  font-weight: bold;
+  background-color: #f8f9fa;
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #2c3e50;
+  border-bottom: 2px solid #e9ecef;
+  position: sticky;
+  top: 0;
 }
 
-.table tr:nth-child(even) {
-  background-color: #f2f2f2;
+.table td {
+  padding: 16px;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: top;
 }
 
 .table tr:hover {
-  background-color: #e9ecef;
+  background-color: #f8f9fa;
 }
 
-.image {
-  width: 100px;
-  height: auto;
-  border-radius: 5px;
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.thumbnail {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
   object-fit: cover;
 }
 
-.buttons {
+.image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.description {
+  max-width: 250px;
+  color: #5d6d7e;
+  line-height: 1.5;
+}
+
+.inStock {
+  color: #27ae60;
+  font-weight: 600;
+  background-color: rgba(39, 174, 96, 0.1);
+  padding: 4px 8px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.outOfStock {
+  color: #e74c3c;
+  font-weight: 600;
+  background-color: rgba(231, 76, 60, 0.1);
+  padding: 4px 8px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.tags {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  background-color: #e8f4fd;
+  color: #2980b9;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.featureTag {
+  background-color: #f9f3ff;
+  color: #8e44ad;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.prices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.priceItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priceLabel {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+.priceValue {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
 }
 
 .editButton, .deleteButton {
-  padding: 8px 15px;
-  font-size: 14px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  padding: 8px;
   cursor: pointer;
-  text-decoration: none;
-  background-color: #007bff; 
-  color: white;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .editButton {
-  background-color: #ffc107;
-}
-
-.deleteButton {
-  background-color: #dc3545;
+  background-color: rgba(52, 152, 219, 0.1);
+  color: #3498db;
 }
 
 .editButton:hover {
-  background-color: #e0a800;
-  transform: scale(1.02);
+  background-color: #3498db;
+  color: white;
+}
+
+.deleteButton {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
 }
 
 .deleteButton:hover {
-  background-color: #c82333;
-  transform: scale(1.02);
+  background-color: #e74c3c;
+  color: white;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: 16px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.errorContainer h2 {
+  color: #e74c3c;
+  margin-bottom: 16px;
+}
+
+.retryButton {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  margin-top: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .statsContainer {
+    grid-template-columns: 1fr;
+  }
 }
