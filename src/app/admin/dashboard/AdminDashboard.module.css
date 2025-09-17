@@ -1,0 +1,17 @@
+.dashboard {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .main {
+    flex-grow: 1;
+    background-color: #ecf0f1;
+    padding: 20px;
+  }
+  
+
+  .h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

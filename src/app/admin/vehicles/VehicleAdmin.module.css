@@ -1,0 +1,111 @@
+.container {
+  padding: 40px;
+  max-width: 1700px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333;
+}
+
+.addButton {
+  display: block;
+  margin: 0 auto 30px auto;
+  padding: 12px 30px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.addButton:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+.tableContainer {
+  overflow-x: auto;
+  cursor: grab;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.tableContainer:active {
+  cursor: grabbing;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 15px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table tr:hover {
+  background-color: #e9ecef;
+}
+
+.image {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.editButton, .deleteButton {
+  padding: 8px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: #007bff; 
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.editButton {
+  background-color: #ffc107;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+}
+
+.editButton:hover {
+  background-color: #e0a800;
+  transform: scale(1.02);
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+  transform: scale(1.02);
+}
