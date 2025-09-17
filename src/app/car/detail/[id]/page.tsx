@@ -245,123 +245,177 @@ function CarDetails() {
   
 
   return (
-    <div className={styles.car_details_container}>
-      <div className={styles.image_gallery}>
-        <div className={styles.thumbnail_list}>
-          {[car.primaryImage, ...car.otherImages].map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`${car.name} thumbnail ${index + 1}`}
-              className={styles.thumbnail}
-              onMouseEnter={() => handleImageHover(img)}
-            />
-          ))}
-        </div>
-        <div className={styles.main_image_container}>
-          <img
-            src={selectedImage || car.primaryImage}
-            alt={car.name}
-            className={styles.main_image}
-          />
+    <div className={styles.luxury_container}>
+      <div className={styles.hero_section}>
+        <div className={styles.hero_content}>
+          {userName && <p className={styles.welcome_text}>Welcome {userName.toUpperCase()}!</p>}
+          <h1 className={styles.car_name}>{car.name}</h1>
+          <p className={styles.car_tagline}>Experience extraordinary performance</p>
         </div>
       </div>
 
-      <div className={styles.car_info}>
-        {userName && <p>Welcome {userName}!</p>}
-        <h1 className={styles.car_name}>{car.name}</h1>
-        <p className={styles.car_description}>{car.description}</p>
-        <p className={styles.car_quantity}>
-          Available: {car.availableQuantity}
-        </p>
-        {selectedPrice !== null && (
-          <p className={styles.car_price}>  
-            <strong>Price:</strong> ₹{selectedPrice.toFixed(2)}
-          </p>
-        )}
-
-        <div className={styles.date_picker_container}>
-          <label>Select Date:</label>
-          <div className={styles.date_picker_wrapper}>
-            <DatePicker
-              id="datePicker"
-              selected={selectedDate}
-              onChange={(date: Date | null) => setSelectedDate(date || new Date())}
-              minDate={new Date()}
-              dateFormat="yyyy-MM-dd"
-              className={styles.date_picker}
+      <div className={styles.main_content}>
+        <div className={styles.image_gallery}>
+          <div className={styles.main_image_container}>
+            <img
+              src={selectedImage || car.primaryImage}
+              alt={car.name}
+              className={styles.main_image}
             />
+          </div>
+          <div className={styles.thumbnail_list}>
+            {[car.primaryImage, ...car.otherImages].map((img, index) => (
+              <div 
+                key={index} 
+                className={`${styles.thumbnail_wrapper} ${selectedImage === img ? styles.active : ''}`}
+                onClick={() => setSelectedImage(img)}
+              >
+                <img
+                  src={img}
+                  alt={`${car.name} thumbnail ${index + 1}`}
+                  className={styles.thumbnail}
+                />
+              </div>
+            ))}
           </div>
         </div>
 
-        <div>
-          <label htmlFor="vehicleType">Select Model: </label>
-          <select
-            id="vehicleType"
-            onChange={(e) => handleTypeChange(e.target.value)}
-          >
-            <option value="">Select Model</option>
-            {car.vehicleTypes.map((type) => (
-              <option key={type.id} value={type.id}>
-                {type.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {selectedType && (
-          <div className={styles.car_features}>
-            <h2>Features:</h2>
-            {filteredFeatures.length === 0 ? (
-              <p>No features available for this model.</p>
-            ) : (
-              <ul>
-                {filteredFeatures.map((feature) => (
-                  <li key={feature.id}>
-                    <p>
-                      <strong>Engine Type:</strong> {feature.engineType}
-                    </p>
-                    <p>
-                      <strong>Transmission:</strong> {feature.transmission}
-                    </p>
-                    <p>
-                      <strong>Horsepower:</strong> {feature.horsepower} HP
-                    </p>
-                    <p>
-                      <strong>Torque:</strong> {feature.torque} Nm
-                    </p>
-                    <p>
-                      <strong>Fuel Efficiency:</strong> {feature.fuelEfficiency}{" "}
-                      km/l
-                    </p>
-                    <p>
-                      <strong>Dimensions:</strong> {feature.dimensions}
-                    </p>
-                    <p>
-                      <strong>Weight:</strong> {feature.weight} kg
-                    </p>
-                    <p>
-                      <strong>Safety Features:</strong>{" "}
-                      {feature.safetyFeatures.join(", ")}
-                    </p>
-                    <p>
-                      <strong>Infotainment:</strong> {feature.infotainment}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+        <div className={styles.booking_panel}>
+          <div className={styles.price_section}>
+            <div className={styles.availability}>
+              <span className={styles.available_count}>{car.availableQuantity}</span>
+              <span>Available Now</span>
+            </div>
+            {selectedPrice !== null && (
+              <div className={styles.price_display}>
+                <span className={styles.price_label}>Starting at</span>
+                <span className={styles.price_value}>₹{selectedPrice.toLocaleString('en-IN')}</span>
+              </div>
             )}
           </div>
-        )}
 
-        <button
-          className={styles.booking_button}
-          onClick={handleBookNow}
-          disabled={selectedPrice === null}
-        >
-          Book Now
-        </button>
+          <div className={styles.booking_form}>
+            <div className={styles.form_group}>
+              <label className={styles.form_label}>Select Date</label>
+              <div className={styles.date_picker_wrapper}>
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date: Date | null) => setSelectedDate(date || new Date())}
+                  minDate={new Date()}
+                  dateFormat="MMMM d, yyyy"
+                  className={styles.date_picker}
+                  popperClassName={styles.date_popper}
+                />
+                <span className={styles.calendar_icon}>📅</span>
+              </div>
+            </div>
+
+            <div className={styles.form_group}>
+              <label className={styles.form_label}>Select Model</label>
+              <select
+                className={styles.model_select}
+                onChange={(e) => handleTypeChange(e.target.value)}
+                value={selectedType || ''}
+              >
+                <option value="">Choose a model variant</option>
+                {car.vehicleTypes.map((type) => (
+                  <option key={type.id} value={type.id}>
+                    {type.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button
+              className={styles.booking_button}
+              onClick={handleBookNow}
+              disabled={selectedPrice === null}
+            >
+              <span className={styles.button_text}>Reserve Now</span>
+              <span className={styles.button_arrow}>→</span>
+            </button>
+          </div>
+
+          {selectedType && filteredFeatures.length > 0 && (
+            <div className={styles.features_preview}>
+              <h3>Key Features</h3>
+              <div className={styles.features_grid}>
+                <div className={styles.feature_item}>
+                  <span className={styles.feature_icon}>⚙️</span>
+                  <span>{filteredFeatures[0].engineType}</span>
+                </div>
+                <div className={styles.feature_item}>
+                  <span className={styles.feature_icon}>🚀</span>
+                  <span>{filteredFeatures[0].horsepower} HP</span>
+                </div>
+                <div className={styles.feature_item}>
+                  <span className={styles.feature_icon}>⛽</span>
+                  <span>{filteredFeatures[0].fuelEfficiency} km/l</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
+
+      {selectedType && filteredFeatures.length > 0 && (
+        <div className={styles.detailed_specs}>
+          <h2>Technical Specifications</h2>
+          <div className={styles.specs_grid}>
+            <div className={styles.specs_group}>
+              <h3>Performance</h3>
+              <div className={styles.spec_item}>
+                <span>Engine</span>
+                <span>{filteredFeatures[0].engineType}</span>
+              </div>
+              <div className={styles.spec_item}>
+                <span>Transmission</span>
+                <span>{filteredFeatures[0].transmission}</span>
+              </div>
+              <div className={styles.spec_item}>
+                <span>Horsepower</span>
+                <span>{filteredFeatures[0].horsepower} HP</span>
+              </div>
+              <div className={styles.spec_item}>
+                <span>Torque</span>
+                <span>{filteredFeatures[0].torque} Nm</span>
+              </div>
+            </div>
+
+            <div className={styles.specs_group}>
+              <h3>Dimensions</h3>
+              <div className={styles.spec_item}>
+                <span>Size</span>
+                <span>{filteredFeatures[0].dimensions}</span>
+              </div>
+              <div className={styles.spec_item}>
+                <span>Weight</span>
+                <span>{filteredFeatures[0].weight} kg</span>
+              </div>
+              <div className={styles.spec_item}>
+                <span>Fuel Efficiency</span>
+                <span>{filteredFeatures[0].fuelEfficiency} km/l</span>
+              </div>
+            </div>
+
+            <div className={styles.specs_group}>
+              <h3>Features</h3>
+              <div className={styles.spec_item}>
+                <span>Infotainment</span>
+                <span>{filteredFeatures[0].infotainment}</span>
+              </div>
+              <div className={styles.specs_list}>
+                <span>Safety Features</span>
+                <ul>
+                  {filteredFeatures[0].safetyFeatures.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
